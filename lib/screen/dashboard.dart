@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rassasy_tab/login.dart';
@@ -6,7 +5,7 @@ import 'package:rassasy_tab/screen/pos.dart';
 import 'package:rassasy_tab/screen/product_details.dart';
 import 'package:rassasy_tab/screen/product_group.dart';
 import 'package:rassasy_tab/screen/report_page.dart';
-import 'package:rassasy_tab/screen/settings_page.dart';
+import 'package:rassasy_tab/screen/setting/settings_page.dart';
 
 import 'customer_details.dart';
 
@@ -37,21 +36,20 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
 
-          title: Text("Dashboard",style: TextStyle(  fontWeight: FontWeight.bold,    color: Colors.black,fontSize: 23,  ),),
-          backgroundColor: Color(0xffF3F3F3),
+          title: const Text("Dashboard",style: TextStyle(  fontWeight: FontWeight.bold,    color: Colors.black,fontSize: 23,  ),),
+          backgroundColor: const Color(0xffF3F3F3),
           actions: [
             Theme(
               data: Theme.of(context).copyWith(
-                  textTheme: TextTheme().apply(bodyColor: Colors.black),
+                  textTheme: const TextTheme().apply(bodyColor: Colors.black),
                   dividerColor: Colors.white,
-                  iconTheme: IconThemeData(color: Colors.white)),
+                  iconTheme: const IconThemeData(color: Colors.black)),
               child: PopupMenuButton<int>(
                 color: Colors.white,
                 itemBuilder: (context) => [
-                  PopupMenuItem<int>(value: 0, child: const Text("Settings")),
-                  // const PopupMenuItem<int>(
-                  //     value: 1, child: Text("Privacy Policy page")),
-                  PopupMenuDivider(),
+                  const PopupMenuItem<int>(value: 0, child: Text("Settings")),
+
+                  const PopupMenuDivider(),
                   PopupMenuItem<int>(
                       value: 1,
                       child: Row(
@@ -67,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       )),
                 ],
-                onSelected: (item) => SelectedItem(context, item),
+                onSelected: (item) => selectedItem(context, item),
               ),
             ),
           ],
@@ -141,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             MaterialPageRoute(
                                                 builder:
                                                     (BuildContext context) =>
-                                                    ProductDetails()));
+                                                    const ProductDetails()));
                                       },
                                       icon: SvgPicture.asset(
                                           'assets/svg/products.svg'),
@@ -180,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             MaterialPageRoute(
                                                 builder:
                                                     (BuildContext context) =>
-                                                    CustomerDetails()));
+                                                    const CustomerDetails()));
                                       },
                                       icon: SvgPicture.asset(
                                           'assets/svg/customer.svg'),
@@ -210,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (BuildContext context) =>
-                                                  POS()));
+                                                  const POS()));
                                     },
                                     icon:
                                     SvgPicture.asset("assets/svg/POS.svg"),
@@ -251,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             MaterialPageRoute(
                                                 builder:
                                                     (BuildContext context) =>
-                                                    ReportPage()));
+                                                    const ReportPage()));
                                       },
                                       icon: SvgPicture.asset(
                                           "assets/svg/report.svg"),
@@ -272,17 +270,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
-  void SelectedItem(BuildContext context, item) {
+  void selectedItem(BuildContext context, item) {
     switch (item) {
       case 0:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => SettingsPage()));
+            .push(MaterialPageRoute(builder: (context) => const SettingsPage()));
         break;
 
+
       case 1:
-        print("User Logged out");
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => LoginPage()),
+          MaterialPageRoute(builder: (context) => const LoginPage()),
           //(route) => false
         );
         break;

@@ -2,11 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rassasy_tab/login.dart';
-import 'package:rassasy_tab/screen/customer_details.dart';
 import 'package:rassasy_tab/screen/dashboard.dart';
 
-import 'package:rassasy_tab/screen/product_group.dart';
-import 'package:rassasy_tab/screen/settings_page.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,7 +29,7 @@ class _MyHomePageState extends State<SplashScreen1> {
   }
 
   void startTimer() {
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       navigateUser(); //It will redirect  after 3 seconds
     });
   }
@@ -40,9 +37,7 @@ class _MyHomePageState extends State<SplashScreen1> {
   void navigateUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var status = prefs.getBool('isLoggedIn') ?? false;
-    print(status);
     var companySelected = prefs.getBool('companySelected') ?? false;
-    print(companySelected);
     if (status) {
      if(companySelected){
       Navigator.pushReplacement(
@@ -54,13 +49,13 @@ class _MyHomePageState extends State<SplashScreen1> {
        Navigator.pushReplacement(
            context,
            MaterialPageRoute(
-               builder: (BuildContext context) => CompanyList()));
+               builder: (BuildContext context) => const CompanyList()));
      }
 
     }
 
     else {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const LoginPage()));
     }
   }
 

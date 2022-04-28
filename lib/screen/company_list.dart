@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:rassasy_tab/global/global.dart';
+import 'package:rassasy_tab/screen/employee_pin_no.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dashboard.dart';
@@ -38,7 +39,7 @@ class CompanyListState extends State<CompanyList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
+                            SizedBox(
 
                               width: MediaQuery.of(context).size.width / 2,
                                  height: MediaQuery.of(context).size.height / 16,
@@ -68,69 +69,8 @@ class CompanyListState extends State<CompanyList> {
                               )
                             ),
 
-                            Container(
-
-                              width: MediaQuery.of(context).size.width / 2,
-
-                              height: MediaQuery.of(context).size.height / 14,
-                              child: const TextField(
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  border: OutlineInputBorder(
-                                  ),
-                                  
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 2,
-                              height: MediaQuery.of(context).size.height / 2.1,
-                              child: ListView.builder(
-                                itemCount: companyList.length,
-                                  itemBuilder:   (BuildContext context, int index) {
-                                    return Card(
-                                        child: ListTile(
-                                          onTap: () async {
-                                            SharedPreferences prefs=await SharedPreferences.getInstance();
-                                            prefs.setString('companyName', companyList[index].companyName);
-                                            prefs.setString('companyType', companyList[index].companyType);
-                                            prefs.setString('expiryDate', companyList[index].expiryDate);
-                                            prefs.setString('permission', companyList[index].permission);
-                                            prefs.setString('edition',companyList[index].permission);
-                                            prefs.setBool('isPosUser', companyList[index].isPosUser);
-                                            prefs.setString('companyID', companyList[index].id);
-                                            prefs.setBool('companySelected', true);
-                                            print(companyList[index].id);
-
-
-
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (BuildContext context) => DashBoard()));
-
-                                          },
-
-                                      trailing:Column(
-                                        children: [
-                                          Text(companyList[index].permission,
-                                              style: const TextStyle(fontSize: 11,color: Colors.black)),
-                                          Text(companyList[index].expiryDate,
-                                              style: const TextStyle(fontSize: 11,color: Colors.black)),
-                                          Text(companyList[index].edition,
-                                              style: const TextStyle(fontSize: 11,color: Colors.black)),
-
-
-                                        ],
-                                      ),
-                                      title: Text(companyList[index].companyName,
-                                          style: const TextStyle(fontSize: 17,color: Colors.black),),
-                                      subtitle: Text(companyList[index].companyType,
-                                          style: const TextStyle(fontSize: 11,color: Colors.black)),
-
-                                    ));
-                                  }),
-                            ),
+                            searchCompany()  ,
+                            displayCompanyList()  ,
                           ],
                         ),
                       ),
@@ -140,6 +80,8 @@ class CompanyListState extends State<CompanyList> {
                         width: MediaQuery.of(context).size.width / 2,
 
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: const [
                             Text('2020 | Vikncodes LLP | All Rights Reserved'),
                             Text('www.vikncodes.com')
@@ -151,6 +93,68 @@ class CompanyListState extends State<CompanyList> {
     ));
   }
 
+  Widget searchCompany(){
+    return SizedBox(
+
+      width: MediaQuery.of(context).size.width / 2,
+
+      height: MediaQuery.of(context).size.height / 14,
+      child: const TextField(
+        decoration: InputDecoration(
+          isDense: true,
+          border: OutlineInputBorder(
+          ),
+
+        ),
+      ),
+    );
+  }
+Widget displayCompanyList(){
+    return SizedBox(
+      width: MediaQuery.of(context).size.width / 2,
+      height: MediaQuery.of(context).size.height / 2.1,
+      child: ListView.builder(
+          itemCount: companyList.length,
+          itemBuilder:   (BuildContext context, int index) {
+            return Card(
+                child: ListTile(
+                  onTap: () async {
+                    SharedPreferences prefs=await SharedPreferences.getInstance();
+                    prefs.setString('companyName', companyList[index].companyName);
+                    prefs.setString('companyType', companyList[index].companyType);
+                    prefs.setString('expiryDate', companyList[index].expiryDate);
+                    prefs.setString('permission', companyList[index].permission);
+                    prefs.setString('edition',companyList[index].permission);
+                    prefs.setBool('isPosUser', companyList[index].isPosUser);
+                    prefs.setString('companyID', companyList[index].id);
+                    prefs.setBool('companySelected', true);
+
+
+
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => const EnterPinNumber()));
+
+                  },
+
+
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(companyList[index].companyName,
+                        style: const TextStyle(fontSize: 17,color: Colors.black),),
+                      Text(companyList[index].companyType,
+                          style: const TextStyle(fontSize: 12,color: Colors.black)),
+                    ],
+                  ),
+                  subtitle: Text(companyList[index].edition,
+                      style: const TextStyle(fontSize: 12,color: Colors.black)),
+
+                ));
+          }),
+    );
+}
   @override
   void initState(){
     super.initState();
@@ -176,12 +180,9 @@ class CompanyListState extends State<CompanyList> {
         var userID = prefs.getInt('user_id') ?? 0;
         var accessToken = prefs.getString('access') ?? '';
         final String url = '$baseUrl/posholds/pos-companies/';
-        print(userID);
-        print(url);
-        print(accessToken);
+
 
         Map data = {"userId": userID};
-        print(data);
         //encode Map to JSON
         var body = json.encode(data);
 
@@ -192,12 +193,9 @@ class CompanyListState extends State<CompanyList> {
             },
             body: body);
 
-        print("${response.statusCode}");
-        print("${response.body}");
         Map n = json.decode(utf8.decode(response.bodyBytes));
         var status = n["StatusCode"];
         var responseJson = n["data"];
-        print(responseJson);
         if (status == 6000) {
           setState(() {
             stop();
@@ -222,8 +220,7 @@ class CompanyListState extends State<CompanyList> {
           stop();
 
         });
-        print(e);
-        print('Error In Loading');
+
       }
     }
   }

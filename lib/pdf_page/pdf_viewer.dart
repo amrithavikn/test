@@ -40,6 +40,6 @@ Future<void> _pdf() async {
     ),
   );
 
-  final file = File('assets/pdf/Terms_and_conditionconverted.pdf');
+  final file = File('assets/pdf/terms.pdf');
   await file.writeAsBytes(await pdf.save());
 }

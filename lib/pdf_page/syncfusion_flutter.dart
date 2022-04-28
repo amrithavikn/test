@@ -41,7 +41,7 @@ class _PrivacyPolicyState extends State<Syncfusion_flutter> {
         body: Container(
           color: Colors.red,
           child: SfPdfViewer.asset(
-              'assets/pdf/Terms_and_conditionconverted.pdf'),
+              'assets/pdf/terms.pdf'),
         ));
   }
 }

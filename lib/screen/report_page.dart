@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:rassasy_tab/screen/dashboard.dart';
 
 class ReportPage extends StatefulWidget {
   const ReportPage({Key? key}) : super(key: key);
@@ -18,7 +16,7 @@ class _ReportPageState extends State<ReportPage> {
         home: Scaffold(
             appBar: AppBar(
                 leading: IconButton(
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -42,188 +40,15 @@ class _ReportPageState extends State<ReportPage> {
                   flex: 4,
                   child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
+                      child: SizedBox(
                         height: MediaQuery.of(context).size.height /
                             1, //height of button
                         width: MediaQuery.of(context).size.width / 2.4,
                         //   color: Colors.red[100],
                         child: Column(children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height /
-                                13, //height of button
-                            width: MediaQuery.of(context).size.width / 1,
-                            // color: Colors.blue[100],
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: MediaQuery.of(context).size.height /
-                                      13, //height of button
-                                  width: MediaQuery.of(context).size.width / 3,
-                                  // color: Colors.green[100],
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: const [
-                                      Text('Table 1 ',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                          ),
-                                          textAlign: TextAlign.left),
-                                      Text('(savad farooque) ',
-                                          style: TextStyle(
-                                            // fontWeight: FontWeight.w600,
-                                            color: Colors.grey,
-                                            fontSize: 14,
-                                          ),
-                                          textAlign: TextAlign.left),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  height: MediaQuery.of(context).size.height /
-                                      13, //height of button
-                                  width: MediaQuery.of(context).size.width / 4,
-                                  // color: Colors.blue[100],)
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: const [
-                                      Text('<Date & Time>')
-                                    ],
-                                  ),
-
-                                )
-                              ],
-                            ),
-                          ),
-                          Container(
-                              height: MediaQuery.of(context).size.height /
-                                  1.35, //height of button
-                              width: MediaQuery.of(context).size.width / 1.1,
-                              //color: Colors.yellow[100],
-
-                              //color: Colors.red,
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: 5,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Card(
-                                      shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                            color: Colors.grey, width: .5),
-                                        borderRadius: BorderRadius.circular(2),
-                                      ),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            SizedBox(
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                                  11,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                                  5.5,
-                                              //  color:Colors.red,
-                                              child: Column(
-                                                //  mainAxisSize: MainAxisSize.max,
-                                                //alignment changed
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                                children: const <Widget>[
-                                                  Text(
-                                                      'plate mexican beef shawarma ',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.bold)),
-                                                  SizedBox(
-                                                    height: 2,
-                                                  ),
-                                                  Text('Description')
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                                  11,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                                  5.5,
-                                              // color: Colors.green,
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                                children: const <Widget>[
-                                                  Text('Rate ',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.w500)),
-                                                  Text('Quantity',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.w500)),
-                                                  Text('Extra Spicy',
-                                                      style: TextStyle(
-                                                          color: Colors.orange,
-                                                          fontWeight:
-                                                          FontWeight.w300))
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(
-                                                height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                    11,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                    5.5,
-                                                // color: Colors.blue,
-                                                child: Column(
-                                                  mainAxisSize:
-                                                  MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: const <Widget>[
-                                                    Text('Tax',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .w500)),
-                                                    Text('Gross amt',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .w500)),
-                                                    Text('Net total:',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .bold))
-                                                  ],
-                                                )),
-                                          ]),
-                                    );
-                                  })),
-                          Container(
+                          tableHeaderDetail()  ,
+                          productDetailList()   ,
+                          SizedBox(
                             height: MediaQuery.of(context).size.height /
                                 17, //height of button
                             width: MediaQuery.of(context).size.width / 1,
@@ -301,166 +126,351 @@ class _ReportPageState extends State<ReportPage> {
                                 ),
                               ),
                             ),
-                            Container(
-                              height: MediaQuery.of(context).size.height /
-                                  1.35, //height of button
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              //   color: Colors.purple[100],),
-                              child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: 5,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Card(
-                                        child: Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              SizedBox(
-                                                height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                    13,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                    11,
-                                                // color:Colors.red,
-                                                child: Column(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: const <Widget>[
-                                                    Text('Table 1 ',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                            FontWeight.bold)),
-                                                    Text('<Customer>')
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                    13,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                    10,
-                                                //   color:Colors.limeAccent,
-                                                child: Column(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: const <Widget>[
-                                                    Text('<Date & Time>')
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                    15,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                    14,
-                                                //  color:Colors.blue,
-                                                child: Column(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: const <Widget>[
-                                                    Text('<Total>',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                            FontWeight.bold))
-                                                  ],
-                                                ),
-                                              ),
-                                            ]));
-                                  }),
-                            ),
-                            Container(
-                              height: MediaQuery.of(context).size.height /
-                                  16, //height of button
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              //  color: Colors.red[100],
-                              child: Row(
-                                //mainAxisAlignment:
-                                // MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            20,
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            9,
-                                        //    color:Colors.blue,
-                                        child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            // padding: const EdgeInsets.all(16.0),
-                                            primary: Colors.white,
-                                            backgroundColor: Colors.black,
-                                            textStyle:
-                                            const TextStyle(fontSize: 15),
-                                          ),
-                                          onPressed: () {},
-                                          child: const Text('Export'),
-                                        )),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    SizedBox(
-                                      height:
-                                      MediaQuery.of(context).size.height /
-                                          20,
-                                      width:
-                                      MediaQuery.of(context).size.width / 9,
-                                      //  color:Colors.red,
-                                      child: TextButton(
-                                        style: TextButton.styleFrom(
-                                          // padding: const EdgeInsets.all(16.0),
-                                          primary: Colors.white,
-                                          backgroundColor: Colors.blue,
-                                          textStyle:
-                                          const TextStyle(fontSize: 15),
-                                        ),
-                                        onPressed: () {},
-                                        child: const Text('Print'),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    SizedBox(
-                                        height:
-                                        MediaQuery.of(context).size.height /
-                                            13,
-                                        width:
-                                        MediaQuery.of(context).size.width /
-                                            16.5,
-                                        //  color:Colors.limeAccent,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: SvgPicture.asset(
-                                              'assets/svg/filter.svg'),
-                                          iconSize: 44,
-                                        )),
-                                  ]),
-                            )
+                            tableDetailList()  ,
+                            printAndExportDetailBottom()
                           ],
                         ))),
               )
             ])));
+  }
+  Widget tableHeaderDetail(){
+    return  SizedBox(
+      height: MediaQuery.of(context).size.height /
+          13, //height of button
+      width: MediaQuery.of(context).size.width / 1,
+      // color: Colors.blue[100],
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height /
+                13, //height of button
+            width: MediaQuery.of(context).size.width / 3,
+            // color: Colors.green[100],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Text('Table 1 ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.left),
+                Text('(savad farooque) ',
+                    style: TextStyle(
+                      // fontWeight: FontWeight.w600,
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.left),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height /
+                13, //height of button
+            width: MediaQuery.of(context).size.width / 4,
+            // color: Colors.blue[100],)
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Text('<Date & Time>')
+              ],
+            ),
+
+          )
+        ],
+      ),
+    );
+  }
+  Widget productDetailList(){
+    return SizedBox(
+        height: MediaQuery.of(context).size.height /
+            1.35, //height of button
+        width: MediaQuery.of(context).size.width / 1.1,
+        //color: Colors.yellow[100],
+
+        //color: Colors.red,
+        child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: 5,
+            itemBuilder:
+                (BuildContext context, int index) {
+              return Card(
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(
+                      color: Colors.grey, width: .5),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+                child: Row(
+                    mainAxisAlignment:
+                    MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context)
+                            .size
+                            .height /
+                            11,
+                        width: MediaQuery.of(context)
+                            .size
+                            .width /
+                            5.5,
+                        //  color:Colors.red,
+                        child: Column(
+                          //  mainAxisSize: MainAxisSize.max,
+                          //alignment changed
+                          mainAxisAlignment:
+                          MainAxisAlignment.center,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: const <Widget>[
+                            Text(
+                                'plate mexican beef shawarma ',
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.bold)),
+                            SizedBox(
+                              height: 2,
+                            ),
+                            Text('Description')
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context)
+                            .size
+                            .height /
+                            11,
+                        width: MediaQuery.of(context)
+                            .size
+                            .width /
+                            5.5,
+                        // color: Colors.green,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment:
+                          MainAxisAlignment.center,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: const <Widget>[
+                            Text('Rate ',
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.w500)),
+                            Text('Quantity',
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.w500)),
+                            Text('Extra Spicy',
+                                style: TextStyle(
+                                    color: Colors.orange,
+                                    fontWeight:
+                                    FontWeight.w300))
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context)
+                              .size
+                              .height /
+                              11,
+                          width: MediaQuery.of(context)
+                              .size
+                              .width /
+                              5.5,
+                          // color: Colors.blue,
+                          child: Column(
+                            mainAxisSize:
+                            MainAxisSize.max,
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: const <Widget>[
+                              Text('Tax',
+                                  style: TextStyle(
+                                      fontWeight:
+                                      FontWeight
+                                          .w500)),
+                              Text('Gross amt',
+                                  style: TextStyle(
+                                      fontWeight:
+                                      FontWeight
+                                          .w500)),
+                              Text('Net total:',
+                                  style: TextStyle(
+                                      fontWeight:
+                                      FontWeight
+                                          .bold))
+                            ],
+                          )),
+                    ]),
+              );
+            }));
+  }
+  Widget tableDetailList(){
+    return SizedBox(
+      height: MediaQuery.of(context).size.height /
+          1.35, //height of button
+      width: MediaQuery.of(context).size.width / 2.5,
+      //   color: Colors.purple[100],),
+      child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: 5,
+          itemBuilder:
+              (BuildContext context, int index) {
+            return Card(
+                child: Row(
+                    mainAxisAlignment:
+                    MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context)
+                            .size
+                            .height /
+                            13,
+                        width: MediaQuery.of(context)
+                            .size
+                            .width /
+                            11,
+                        // color:Colors.red,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment:
+                          MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: const <Widget>[
+                            Text('Table 1 ',
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.bold)),
+                            Text('<Customer>')
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context)
+                            .size
+                            .height /
+                            13,
+                        width: MediaQuery.of(context)
+                            .size
+                            .width /
+                            10,
+                        //   color:Colors.limeAccent,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment:
+                          MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: const <Widget>[
+                            Text('<Date & Time>')
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context)
+                            .size
+                            .height /
+                            15,
+                        width: MediaQuery.of(context)
+                            .size
+                            .width /
+                            14,
+                        //  color:Colors.blue,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment:
+                          MainAxisAlignment.start,
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: const <Widget>[
+                            Text('<Total>',
+                                style: TextStyle(
+                                    fontWeight:
+                                    FontWeight.bold))
+                          ],
+                        ),
+                      ),
+                    ]));
+          }),
+    );
+  }
+  Widget printAndExportDetailBottom(){
+    return SizedBox(
+      height: MediaQuery.of(context).size.height /
+          16, //height of button
+      width: MediaQuery.of(context).size.width / 2.5,
+      //  color: Colors.red[100],
+      child: Row(
+        //mainAxisAlignment:
+        // MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+                height:
+                MediaQuery.of(context).size.height /
+                    20,
+                width:
+                MediaQuery.of(context).size.width /
+                    9,
+                //    color:Colors.blue,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    // padding: const EdgeInsets.all(16.0),
+                    primary: Colors.white,
+                    backgroundColor: Colors.black,
+                    textStyle:
+                    const TextStyle(fontSize: 15),
+                  ),
+                  onPressed: () {},
+                  child: const Text('Export'),
+                )),
+            const SizedBox(
+              width: 8,
+            ),
+            SizedBox(
+              height:
+              MediaQuery.of(context).size.height /
+                  20,
+              width:
+              MediaQuery.of(context).size.width / 9,
+              //  color:Colors.red,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  // padding: const EdgeInsets.all(16.0),
+                  primary: Colors.white,
+                  backgroundColor: Colors.blue,
+                  textStyle:
+                  const TextStyle(fontSize: 15),
+                ),
+                onPressed: () {},
+                child: const Text('Print'),
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            SizedBox(
+                height:
+                MediaQuery.of(context).size.height /
+                    13,
+                width:
+                MediaQuery.of(context).size.width /
+                    16.5,
+                //  color:Colors.limeAccent,
+                child: IconButton(
+                  onPressed: () {},
+                  icon: SvgPicture.asset(
+                      'assets/svg/filter.svg'),
+                  iconSize: 44,
+                )),
+          ]),
+    );
   }
 }

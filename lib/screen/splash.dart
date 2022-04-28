@@ -1,23 +1,21 @@
 import 'dart:async';
-import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rassasy_tab/login.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'company_list.dart';
-import 'dashboard.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
-  runApp( Splash());
+  runApp( const Splash());
 }
 
 class Splash extends StatelessWidget {
+  const Splash({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +24,10 @@ class Splash extends StatelessWidget {
       builder: (context, AsyncSnapshot snapshot) {
         // Show splash screen while waiting for app resources to load:
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return MaterialApp(
+          return const MaterialApp(
               debugShowCheckedModeBanner: false,
 
-              home:  NativeSplash());
+              home:   NativeSplash());
         } else {
           // Loading is done, return the app:
           return const MaterialApp(
@@ -44,6 +42,8 @@ class Splash extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -89,12 +89,14 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class NativeSplash extends StatelessWidget {
+  const NativeSplash({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-      Color(0xffF8F8F8),
+      const Color(0xffF8F8F8),
       body: Center(
           child:
           SvgPicture.asset('assets/svg/Logo.svg')

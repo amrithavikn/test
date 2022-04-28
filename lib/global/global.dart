@@ -49,7 +49,7 @@ class Global {
       {String labelTextStr = "", String hintTextStr = ""}) {
     return InputDecoration(
       filled: true,
-      fillColor:Colors.white ,
+    fillColor:Color(0xffF8F8F8) ,
       hintStyle: TextStyle(color: Colors.grey[800], fontSize: 14),
       hintText: hintTextStr,
       labelStyle:
