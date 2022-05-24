@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:rassasy_tab/auth/login/pin/employee_pin_no.dart';
 import 'package:rassasy_tab/global/global.dart';
-import 'package:rassasy_tab/screen/employee_pin_no.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'dashboard.dart';
 
 class CompanyList extends StatefulWidget {
   const CompanyList({Key? key}) : super(key: key);
@@ -112,7 +111,7 @@ class CompanyListState extends State<CompanyList> {
 Widget displayCompanyList(){
     return SizedBox(
       width: MediaQuery.of(context).size.width / 2,
-      height: MediaQuery.of(context).size.height / 2.1,
+      height: MediaQuery.of(context).size.height / 1.6,
       child: ListView.builder(
           itemCount: companyList.length,
           itemBuilder:   (BuildContext context, int index) {

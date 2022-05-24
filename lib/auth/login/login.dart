@@ -1,12 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:rassasy_tab/screen/company_list.dart';
+import 'package:rassasy_tab/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
-
-import 'global/global.dart';
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../../global/global.dart';
+import 'company/select_company.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -18,7 +23,7 @@ class LoginPage extends StatefulWidget {
 TextEditingController userNameController = TextEditingController()
   ..text = "amrithaVikn";
 TextEditingController userPasswordController = TextEditingController()
-  ..text = "12345678A";
+  ..text = "a123456789";
 
 class LoginPageState extends State<LoginPage> {
   @override
@@ -164,15 +169,17 @@ class LoginPageState extends State<LoginPage> {
       });
     } else {
       try {
+        HttpOverrides.global = MyHttpOverrides();
         String baseUrl = BaseUrl.bUrl;
-        SharedPreferences prefs = await SharedPreferences.getInstance();
         final url = '$baseUrl/users/user-login/';
+        print(url);
         Map data = {
           "username": userNameController.text,
           "password": userPasswordController.text,
           "is_mobile": true
 
         };
+        print(data);
         //encode Map to JSON
         var bdy = json.encode(data);
 
@@ -184,9 +191,9 @@ class LoginPageState extends State<LoginPage> {
 
 
         Map n = json.decode(utf8.decode(response.bodyBytes));
-
+        print("${response.statusCode}");
+        print("${response.body}");
         var status = n["success"];
-        var responseJson = n["data"];
         if (status == 6000) {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           setState(() {
@@ -212,12 +219,12 @@ class LoginPageState extends State<LoginPage> {
         else {
           setState(() {
             stop();
-            snackBarMessage(context, "Some thing went wrong");
+            snackBarMessage(context, "Some thing went wrong 1");
           });
         }
       } catch (e) {
         setState(() {
-          snackBarMessage(context, "Some thing went wrong");
+          snackBarMessage(context, "Some thing went wrong 2");
           stop();
         });
 
@@ -225,5 +232,8 @@ class LoginPageState extends State<LoginPage> {
     }
   }
 }
+
+
+
 
 

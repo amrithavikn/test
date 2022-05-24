@@ -1,16 +1,31 @@
- import 'package:flutter/material.dart';
+ import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:rassasy_tab/login.dart';
-import 'package:rassasy_tab/screen/company_list.dart';
-import 'package:rassasy_tab/screen/dashboard.dart';
-import 'package:rassasy_tab/screen/employee_pin_no.dart';
+import 'package:rassasy_tab/auth/login/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'auth/login/company/select_company.dart';
+import 'dashboard/dashboard.dart';
+import 'package:flutter/services.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
-  runApp( MyApp());
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+
+  ]).then((_){
+    runApp(MyApp());
+  });
+
+
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setEnabledSystemUIMode(
+  //     SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+  // runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +36,7 @@ class MyApp extends StatelessWidget {
 
       future: Init.instance.initialize(),
       builder: (context, AsyncSnapshot snapshot) {
-        // Show splash screen while waiting for app resources to load:
+        // Show splash dashboard while waiting for app resources to load:
         if (snapshot.connectionState == ConnectionState.waiting) {
           return MaterialApp(home:  Splash());
         } else {
@@ -31,7 +46,7 @@ class MyApp extends StatelessWidget {
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
 
-                textSelectionTheme: TextSelectionThemeData(
+                textSelectionTheme: const TextSelectionThemeData(
                 //  cursorColor: Colors.green,
                   selectionColor: Colors.transparent,
                  // selectionHandleColor: Colors.blue,
@@ -72,7 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
       if (companySelected) {
         Navigator.pushReplacement(context,
             //dashboard
-            MaterialPageRoute(builder: (BuildContext context) => EnterPinNumber()));
+           // MaterialPageRoute(builder: (BuildContext context) => EnterPinNumber()));310004
+            MaterialPageRoute(builder: (BuildContext context) => DashBoard()));
       } else {
         Navigator.pushReplacement(
             context,
@@ -124,9 +140,13 @@ class Init {
 }
 
 
-
-
-
+ class MyHttpOverrides extends HttpOverrides{
+   @override
+   HttpClient createHttpClient(SecurityContext? context){
+     return super.createHttpClient(context)
+       ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+   }
+ }
 
 
 
