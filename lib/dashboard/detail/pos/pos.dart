@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -9,6 +10,8 @@ import 'package:rassasy_tab/global/global.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../main.dart';
+
 class POS extends StatefulWidget {
   const POS({Key? key}) : super(key: key);
 
@@ -17,10 +20,8 @@ class POS extends StatefulWidget {
 }
 
 class _POSPageState extends State<POS> {
-
-  ScrollController productController=ScrollController();
-  ScrollController categoryController=ScrollController();
-
+  ScrollController productController = ScrollController();
+  ScrollController categoryController = ScrollController();
 
   Color color1 = Colors.white;
   Color color2 = const Color(0xffF8F8F8);
@@ -51,6 +52,7 @@ class _POSPageState extends State<POS> {
   String dropDown = 'A/C Room';
   String status = "Vacant";
   String takeAway = "Vacant";
+  String s = "To be Paidjjj";
 
   bool payment = false;
   bool veg = false;
@@ -104,27 +106,26 @@ class _POSPageState extends State<POS> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: Row(
-            children: [
-              SizedBox(
-                height:
-                MediaQuery.of(context).size.height / 1, //height of button
-                width: MediaQuery.of(context).size.width / 1.1,
-                child: selectOrderType(index),
-              ),
-              Container(
-                color: Colors.white,
-                height:
-                MediaQuery.of(context).size.height / 1, //height of button
-                width: MediaQuery.of(context).size.width / 11,
-                child: orderTypeDetailScreen(),
-              )
-            ],
+    return Scaffold(
+
+      body: Row(
+        children: [
+          SizedBox(
+            height:
+            MediaQuery.of(context).size.height / 1, //height of button
+            width: MediaQuery.of(context).size.width / 1.1,
+            child: selectOrderType(index),
           ),
-        ));
+          Container(
+            color: Colors.white,
+            height:
+            MediaQuery.of(context).size.height / 1, //height of button
+            width: MediaQuery.of(context).size.width / 11,
+            child: orderTypeDetailScreen(),
+          )
+        ],
+      ),
+    );
   }
 
   selectOrderType(int index) {
@@ -162,7 +163,7 @@ class _POSPageState extends State<POS> {
               color: Colors.white,
               //  padding: EdgeInsets.all(7),
               height:
-              MediaQuery.of(context).size.height / 20, //height of button
+                  MediaQuery.of(context).size.height / 20, //height of button
               width: MediaQuery.of(context).size.width / 20,
 
               child: Container(
@@ -194,7 +195,7 @@ class _POSPageState extends State<POS> {
                 color: Colors.white,
                 //  padding: EdgeInsets.all(7),
                 height:
-                MediaQuery.of(context).size.height / 20, //height of button
+                    MediaQuery.of(context).size.height / 20, //height of button
                 width: MediaQuery.of(context).size.width / 20,
 
                 child: Container(
@@ -284,7 +285,7 @@ class _POSPageState extends State<POS> {
                 style: TextButton.styleFrom(
                   primary: Colors.white,
                   backgroundColor:
-                  buttonColor(diningOrderList[dineIndex].status),
+                      buttonColor(diningOrderList[dineIndex].status),
                   textStyle: const TextStyle(
                     fontSize: 12,
                   ),
@@ -298,7 +299,7 @@ class _POSPageState extends State<POS> {
                   });
                 },
                 child: Text(
-                  //  buttonText(index),
+                    //  buttonText(index),
                     diningOrderList[dineIndex].status),
               ),
             ),
@@ -317,7 +318,7 @@ class _POSPageState extends State<POS> {
       children: [
         Container(
           decoration:
-          BoxDecoration(border: Border.all(color: const Color(0xffD6D6D6))),
+              BoxDecoration(border: Border.all(color: const Color(0xffD6D6D6))),
           padding: const EdgeInsets.all(10),
           height: MediaQuery.of(context).size.height / 13,
           width: MediaQuery.of(context).size.width / 1,
@@ -327,7 +328,7 @@ class _POSPageState extends State<POS> {
               Container(
                 alignment: Alignment.centerLeft,
                 height:
-                MediaQuery.of(context).size.height / 11, //height of button
+                    MediaQuery.of(context).size.height / 11, //height of button
                 width: MediaQuery.of(context).size.width / 3,
 
                 child: Column(
@@ -403,7 +404,7 @@ class _POSPageState extends State<POS> {
         ),
         Container(
           decoration:
-          BoxDecoration(border: Border.all(color: const Color(0xffD6D6D6))),
+              BoxDecoration(border: Border.all(color: const Color(0xffD6D6D6))),
           height: MediaQuery.of(context).size.height / 14, //height of button
           width: MediaQuery.of(context).size.width / 1,
           child: Row(
@@ -412,7 +413,7 @@ class _POSPageState extends State<POS> {
             children: [
               SizedBox(
                 height:
-                MediaQuery.of(context).size.height / 12, //height of button
+                    MediaQuery.of(context).size.height / 12, //height of button
                 // width: MediaQuery.of(context).size.width / 18,
 
                 child: IconButton(
@@ -425,14 +426,14 @@ class _POSPageState extends State<POS> {
               Container(
                 padding: const EdgeInsets.all(18),
                 height:
-                MediaQuery.of(context).size.height / 14, //height of button
+                    MediaQuery.of(context).size.height / 14, //height of button
                 // width: MediaQuery.of(context).size.width / 10,
 
                 child: const Text('Add Table', style: TextStyle(fontSize: 13)),
               ),
               SizedBox(
                 height:
-                MediaQuery.of(context).size.height / 12, //height of button
+                    MediaQuery.of(context).size.height / 12, //height of button
                 //   width: MediaQuery.of(context).size.width / 18,
                 child: IconButton(
                     onPressed: () {},
@@ -444,10 +445,10 @@ class _POSPageState extends State<POS> {
               Container(
                 padding: const EdgeInsets.all(18),
                 height:
-                MediaQuery.of(context).size.height / 14, //height of button
+                    MediaQuery.of(context).size.height / 14, //height of button
                 //   width: MediaQuery.of(context).size.width / 8,
                 child:
-                const Text('Remove Table', style: TextStyle(fontSize: 13)),
+                    const Text('Remove Table', style: TextStyle(fontSize: 13)),
               ),
             ],
           ),
@@ -509,7 +510,7 @@ class _POSPageState extends State<POS> {
       if (takeIndex == takeAwayOrderLists.length) {
         return Card(
             margin:
-            const EdgeInsets.only(left: 4, top: 20, right: 0, bottom: 6),
+                const EdgeInsets.only(left: 4, top: 20, right: 0, bottom: 6),
             child: DottedBorder(
                 color: const Color(0xff8D8D8D),
                 strokeWidth: 1,
@@ -561,7 +562,7 @@ class _POSPageState extends State<POS> {
               ),
               SizedBox(
                 height:
-                MediaQuery.of(context).size.height / 9, //height of button
+                    MediaQuery.of(context).size.height / 9, //height of button
                 width: MediaQuery.of(context).size.width / 4.9,
 
                 child: Center(
@@ -579,7 +580,7 @@ class _POSPageState extends State<POS> {
                               IconButton(
                                 onPressed: () {},
                                 icon:
-                                SvgPicture.asset('assets/svg/takeaway.svg'),
+                                    SvgPicture.asset('assets/svg/takeaway.svg'),
                               ),
                               Text(
                                   takeAwayOrderLists[takeIndex]
@@ -635,13 +636,13 @@ class _POSPageState extends State<POS> {
               SizedBox(
                 // padding: EdgeInsets.all(4),
                 height:
-                MediaQuery.of(context).size.height / 22, //height of button
+                    MediaQuery.of(context).size.height / 22, //height of button
                 width: MediaQuery.of(context).size.width / 4.8,
                 child: TextButton(
                   style: TextButton.styleFrom(
                     primary: Colors.white,
                     backgroundColor:
-                    takeAwayButton(takeAwayOrderLists[takeIndex].status),
+                        takeAwayButton(takeAwayOrderLists[takeIndex].status),
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {},
@@ -671,7 +672,7 @@ class _POSPageState extends State<POS> {
           //height of button
           width: MediaQuery.of(context).size.width / 1,
           decoration:
-          BoxDecoration(border: Border.all(color: const Color(0xffD6D6D6))),
+              BoxDecoration(border: Border.all(color: const Color(0xffD6D6D6))),
           //color: Colors.grey,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -679,7 +680,7 @@ class _POSPageState extends State<POS> {
               Container(
                 alignment: Alignment.centerLeft,
                 height:
-                MediaQuery.of(context).size.height / 11, //height of button
+                    MediaQuery.of(context).size.height / 11, //height of button
                 width: MediaQuery.of(context).size.width / 3,
 
                 child: Column(
@@ -804,7 +805,7 @@ class _POSPageState extends State<POS> {
       if (onlineIndex == onlineOrderLists.length) {
         return Card(
             margin:
-            const EdgeInsets.only(left: 4, top: 20, right: 0, bottom: 6),
+                const EdgeInsets.only(left: 4, top: 20, right: 0, bottom: 6),
             child: DottedBorder(
                 color: const Color(0xff8D8D8D),
                 strokeWidth: 1,
@@ -833,7 +834,7 @@ class _POSPageState extends State<POS> {
                                 index = 7;
                               });
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.add,
                               size: 20,
                               color: Colors.white,
@@ -855,7 +856,7 @@ class _POSPageState extends State<POS> {
               ),
               SizedBox(
                 height:
-                MediaQuery.of(context).size.height / 9, //height of button
+                    MediaQuery.of(context).size.height / 9, //height of button
                 width: MediaQuery.of(context).size.width / 4.9,
 
                 child: Column(
@@ -926,13 +927,13 @@ class _POSPageState extends State<POS> {
 
               SizedBox(
                 height:
-                MediaQuery.of(context).size.height / 22, //height of button
+                    MediaQuery.of(context).size.height / 22, //height of button
                 width: MediaQuery.of(context).size.width / 4.8,
                 child: TextButton(
                   style: TextButton.styleFrom(
                     primary: Colors.white,
                     backgroundColor:
-                    onlineButton(onlineOrderLists[onlineIndex].status),
+                        onlineButton(onlineOrderLists[onlineIndex].status),
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {},
@@ -956,7 +957,7 @@ class _POSPageState extends State<POS> {
         //heading container
         Container(
           decoration:
-          BoxDecoration(border: Border.all(color: const Color(0xffD6D6D6))),
+              BoxDecoration(border: Border.all(color: const Color(0xffD6D6D6))),
           padding: const EdgeInsets.all(10),
           height: MediaQuery.of(context).size.height / 13,
           //height of button
@@ -968,7 +969,7 @@ class _POSPageState extends State<POS> {
               Container(
                 alignment: Alignment.centerLeft,
                 height:
-                MediaQuery.of(context).size.height / 11, //height of button
+                    MediaQuery.of(context).size.height / 11, //height of button
                 width: MediaQuery.of(context).size.width / 3,
 
                 child: Column(
@@ -1093,7 +1094,7 @@ class _POSPageState extends State<POS> {
       if (ind == carOrderLists.length) {
         return Card(
             margin:
-            const EdgeInsets.only(left: 4, top: 15, right: 0, bottom: 7),
+                const EdgeInsets.only(left: 4, top: 15, right: 0, bottom: 7),
             child: DottedBorder(
                 color: const Color(0xff8D8D8D),
                 strokeWidth: 1,
@@ -1145,7 +1146,7 @@ class _POSPageState extends State<POS> {
               ),
               SizedBox(
                 height:
-                MediaQuery.of(context).size.height / 9.2, //height of button
+                    MediaQuery.of(context).size.height / 9.2, //height of button
                 width: MediaQuery.of(context).size.width / 4.9,
 
                 child: Column(
@@ -1239,7 +1240,7 @@ class _POSPageState extends State<POS> {
               ),
               SizedBox(
                 height:
-                MediaQuery.of(context).size.height / 22, //height of button
+                    MediaQuery.of(context).size.height / 22, //height of button
                 width: MediaQuery.of(context).size.width / 4.8,
                 child: TextButton(
                   style: TextButton.styleFrom(
@@ -1268,7 +1269,7 @@ class _POSPageState extends State<POS> {
         //heading container
         Container(
           decoration:
-          BoxDecoration(border: Border.all(color: const Color(0xffD6D6D6))),
+              BoxDecoration(border: Border.all(color: const Color(0xffD6D6D6))),
           padding: const EdgeInsets.all(10),
           height: MediaQuery.of(context).size.height / 13,
           //height of button
@@ -1280,7 +1281,7 @@ class _POSPageState extends State<POS> {
               Container(
                 alignment: Alignment.centerLeft,
                 height:
-                MediaQuery.of(context).size.height / 11, //height of button
+                    MediaQuery.of(context).size.height / 11, //height of button
                 width: MediaQuery.of(context).size.width / 3,
 
                 child: Column(
@@ -1405,7 +1406,6 @@ class _POSPageState extends State<POS> {
 
   Widget displayOrderedList() {
     return Container(
-
       height: MediaQuery.of(context).size.height / 1, //height of button
       width: MediaQuery.of(context).size.width / 3,
       child: Column(
@@ -1413,7 +1413,7 @@ class _POSPageState extends State<POS> {
           Container(
               alignment: Alignment.bottomCenter,
               height:
-              MediaQuery.of(context).size.height / 17, //height of button
+                  MediaQuery.of(context).size.height / 17, //height of button
               width: MediaQuery.of(context).size.width / 3,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -1475,7 +1475,6 @@ class _POSPageState extends State<POS> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-
                                     orderDetTable[index].productName,
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -1504,7 +1503,7 @@ class _POSPageState extends State<POS> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  //' ',
+                                    //' ',
                                     "Rate:${orderDetTable[index].unitPrice}",
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w500,
@@ -1548,7 +1547,7 @@ class _POSPageState extends State<POS> {
                           ),
                           decoration: BoxDecoration(
                               border:
-                              Border.all(color: Colors.grey, width: .2)),
+                                  Border.all(color: Colors.grey, width: .2)),
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height /
@@ -1620,7 +1619,7 @@ class _POSPageState extends State<POS> {
                             style: TextButton.styleFrom(
                               primary: const Color(0xffFFFFFF),
                               backgroundColor:
-                              const Color(0xffFF0000), // Background Color
+                                  const Color(0xffFF0000), // Background Color
                             ),
                             onPressed: () {},
                             child: Row(
@@ -1646,7 +1645,7 @@ class _POSPageState extends State<POS> {
                             style: TextButton.styleFrom(
                               primary: const Color(0xffFFFFFF),
                               backgroundColor:
-                              const Color(0xff10C103), // Background Color
+                                  const Color(0xff10C103), // Background Color
                             ),
                             onPressed: () {},
                             child: Row(
@@ -2188,7 +2187,7 @@ class _POSPageState extends State<POS> {
                     child: const Text(
                       'Cancel',
                       style:
-                      TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
                     ),
                   ),
                 ),
@@ -2395,9 +2394,11 @@ class _POSPageState extends State<POS> {
   }
 
   Widget displayCategoryNames() {
-    return SizedBox(
+    return Container(
+      padding: const EdgeInsets.all(5),
+
       height: MediaQuery.of(context).size.height / 6, //height of button
-      width: MediaQuery.of(context).size.width / 1.7,
+      width: MediaQuery.of(context).size.width / 1.6,
       child: Row(
         children: [
           Container(
@@ -2411,7 +2412,7 @@ class _POSPageState extends State<POS> {
             child: IconButton(
               onPressed: () {},
               icon: SvgPicture.asset(
-                'assets/svg/arrowforward.svg',
+                'assets/svg/arrowback.svg',
               ),
             ),
           ),
@@ -2419,7 +2420,7 @@ class _POSPageState extends State<POS> {
           ///here
           SizedBox(
             height: MediaQuery.of(context).size.height / 8, //height of button
-            width: MediaQuery.of(context).size.width / 2.17,
+            width: MediaQuery.of(context).size.width / 2.2,
 
             child: GridView.builder(
                 controller: categoryController,
@@ -2469,6 +2470,7 @@ class _POSPageState extends State<POS> {
                             color: _selectedIndex == index
                                 ? Colors.white
                                 : const Color(0xff172026),
+                            fontWeight: FontWeight.w700,
                           ),
                         )),
                   );
@@ -2512,7 +2514,6 @@ class _POSPageState extends State<POS> {
               return GestureDetector(
                 onTap: () {
                   Map data = {
-
                     "ProductName": productList[index].productName,
                     "UnitName": productList[index].unitName,
                     "Rate": productList[index].defaultSalesPrice,
@@ -2527,57 +2528,54 @@ class _POSPageState extends State<POS> {
                     "KFCAmount": "0",
                     "BatchCode": "0",
                     "SerialNos": [],
-                    "DefaultUnitName":"gh",
+                    "DefaultUnitName": "gh",
                     "GST_SalesTax": productList[index].gstSalesTax,
-                    "SalesTax":"gh",
-                    "GST_TaxName":"",
-                    "VAT_TaxName":"",
-                    "ProductID":2,
-                    "DefaultUnitID":"",
-                    "GST_ID":"",
-                    "VatID":"",
-                    "DefaultSalesPrice":"",
-                    "DefaultPurchasePrice":"",
-                    "is_inclusive":true,
-                    "id":"",
-                    "Qty":"12",
-                    "UnitPrice":"100",
-                    "Description":"Description",
-                    "RateWithTax":"",
-                    "CostPerPrice":"",
-                    "GrossAmount":"1200",
-                    "NetAmount":"1400",
-                    "PriceListID":2,
-                    "DiscountPerc":"",
-                    "DiscountAmount":"",
-                    "TaxableAmount":"10",
-                    "VATPerc":"",
-                    "VATAmount":"",
-                    "SalesDetailsID":1,
-                    "SGSTPerc":"",
-                    "SGSTAmount":"",
-                    "CGSTPerc":"",
-                    "CGSTAmount":"",
-                    "IGSTPerc":"",
-                    "IGSTAmount":"",
-                    "AddlDiscAmt":"",
-                    "CreatedUserID":1,
-                    "detailID":2,
-                    "unitPriceRounded":"",
-                    "quantityRounded":"",
-                    "InclusivePrice":"",
-                    "netAmountRounded":"",
-                    "gstPer":"",
-                    "ProductTaxName":"",
-                    "ProductTaxID":1,
-                    "ActualProductTaxName":"",
-                    "ActualProductTaxID":2,
-                    "SalesPrice":"",
-                    "TotalTaxRounded":"",
+                    "SalesTax": "gh",
+                    "GST_TaxName": "",
+                    "VAT_TaxName": "",
+                    "ProductID": 2,
+                    "DefaultUnitID": "",
+                    "GST_ID": "",
+                    "VatID": "",
+                    "DefaultSalesPrice": "",
+                    "DefaultPurchasePrice": "",
+                    "is_inclusive": true,
+                    "id": "",
+                    "Qty": "12",
+                    "UnitPrice": "100",
+                    "Description": "Description",
+                    "RateWithTax": "",
+                    "CostPerPrice": "",
+                    "GrossAmount": "1200",
+                    "NetAmount": "1400",
+                    "PriceListID": 2,
+                    "DiscountPerc": "",
+                    "DiscountAmount": "",
+                    "TaxableAmount": "10",
+                    "VATPerc": "",
+                    "VATAmount": "",
+                    "SalesDetailsID": 1,
+                    "SGSTPerc": "",
+                    "SGSTAmount": "",
+                    "CGSTPerc": "",
+                    "CGSTAmount": "",
+                    "IGSTPerc": "",
+                    "IGSTAmount": "",
+                    "AddlDiscAmt": "",
+                    "CreatedUserID": 1,
+                    "detailID": 2,
+                    "unitPriceRounded": "",
+                    "quantityRounded": "",
+                    "InclusivePrice": "",
+                    "netAmountRounded": "",
+                    "gstPer": "",
+                    "ProductTaxName": "",
+                    "ProductTaxID": 1,
+                    "ActualProductTaxName": "",
+                    "ActualProductTaxID": 2,
+                    "SalesPrice": "",
+                    "TotalTaxRounded": "",
                   };
-
-
-
 
                   parsingJson.add(data);
 
@@ -2589,7 +2587,7 @@ class _POSPageState extends State<POS> {
                 },
                 child: Container(
                   height:
-                  MediaQuery.of(context).size.height / 8, //height of button
+                      MediaQuery.of(context).size.height / 8, //height of button
                   width: MediaQuery.of(context).size.width / 6,
                   decoration: BoxDecoration(
                       border: Border.all(
@@ -2597,8 +2595,8 @@ class _POSPageState extends State<POS> {
                         color: const Color(0xffC9C9C9),
                       ),
                       borderRadius: const BorderRadius.all(Radius.circular(
-                          5.0) //                 <--- border radius here
-                      )),
+                              5.0) //                 <--- border radius here
+                          )),
                   child: Row(
                     children: [
                       Container(
@@ -2614,67 +2612,75 @@ class _POSPageState extends State<POS> {
                             borderRadius: const BorderRadius.all(
                                 Radius.circular(
                                     5.0) //                 <--- border radius here
-                            )),
+                                )),
 
                         child: SvgPicture.asset('assets/svg/Logo.svg'),
                       ),
-                      SizedBox(
+                      Container(
                         height: MediaQuery.of(context).size.height /
                             8.5, //height of button
-                        width: MediaQuery.of(context).size.width / 11,
+                        width: MediaQuery.of(context).size.width / 10,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height /
-                                  17, //height of button
-                              width: MediaQuery.of(context).size.width / 12,
-                              child: Text(
-                                productList[index].productName,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                // height: MediaQuery.of(context).size.height /                                    17, //height of button
+                                //  width: MediaQuery.of(context).size.width / 11,
+                                child: Text(
+                                  productList[index].productName,
 
-                                // 'plate mexican beef shawarma ',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 13),
+                                  // 'plate mexican beef shawarma ',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                ),
                               ),
                             ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height /
-                                  24, //height of button
-                              width: MediaQuery.of(context).size.width / 12,
-                              child: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Rs. ${productList[index].defaultSalesPrice}",
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                //  height: MediaQuery.of(context).size.height /                                   24, //height of button
+                                // width: MediaQuery.of(context).size.width / 11,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  // crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Rs. ${productList[index].defaultSalesPrice}",
 
-                                    //'Rs.95 ',
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 13),
-                                  ),
-                                  Container(
-                                    height:
-                                    MediaQuery.of(context).size.height / 40,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color: Colors.red, width: 1)),
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          45,
-                                      height:
-                                      MediaQuery.of(context).size.height /
-                                          20,
-                                      child: const Icon(
-                                        Icons.circle,
-                                        size: 14,
-                                        color: Colors.red,
-                                      ),
+                                      //'Rs.95 ',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13),
                                     ),
-                                  )
-                                ],
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              42,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(
+                                              color: Colors.red, width: 1)),
+                                      child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                53,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                30,
+                                        child: const Icon(
+                                          Icons.circle,
+                                          size: 13,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -2840,7 +2846,6 @@ class _POSPageState extends State<POS> {
 
   Widget tableNameHeader() {
     return Container(
-
         padding: const EdgeInsets.all(6),
         height: MediaQuery.of(context).size.height / 15, //height of button
         width: MediaQuery.of(context).size.width / 1.7,
@@ -2849,7 +2854,7 @@ class _POSPageState extends State<POS> {
           children: [
             SizedBox(
               height:
-              MediaQuery.of(context).size.height / 16, //height of button
+                  MediaQuery.of(context).size.height / 16, //height of button
               width: MediaQuery.of(context).size.width / 11,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -2873,21 +2878,26 @@ class _POSPageState extends State<POS> {
               ),
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 setState(() {
                   showAlert();
                 });
               },
-              child:  SizedBox(
+              child: SizedBox(
                 height:
-                MediaQuery.of(context).size.height / 18, //height of button
+                    MediaQuery.of(context).size.height / 18, //height of button
                 width: MediaQuery.of(context).size.width / 6,
                 child: TextButton(
                   style: TextButton.styleFrom(
                     primary: const Color(0xffFFFFFF),
-                    backgroundColor: const Color(0xff172026), // Background Color
+                    backgroundColor:
+                        const Color(0xff172026), // Background Color
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      showAlert();
+                    });
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -2909,7 +2919,6 @@ class _POSPageState extends State<POS> {
                 ),
               ),
             )
-
           ],
         ));
   }
@@ -3075,7 +3084,7 @@ class _POSPageState extends State<POS> {
           //height of button
           width: MediaQuery.of(context).size.width / 1.7,
           decoration:
-          BoxDecoration(border: Border.all(color: Colors.grey, width: .2)),
+              BoxDecoration(border: Border.all(color: Colors.grey, width: .2)),
           child: Column(
             children: [
               Container(
@@ -3128,7 +3137,7 @@ class _POSPageState extends State<POS> {
               ),
               SizedBox(
                 height:
-                MediaQuery.of(context).size.height / 1.5, //height of button
+                    MediaQuery.of(context).size.height / 1.5, //height of button
                 width: MediaQuery.of(context).size.width / 1.4,
                 //  color: Colors.grey,
                 child: Row(
@@ -3166,12 +3175,12 @@ class _POSPageState extends State<POS> {
                                   padding: const EdgeInsets.all(5.0),
                                   width: MediaQuery.of(context).size.width / 15,
                                   height:
-                                  MediaQuery.of(context).size.height / 18,
+                                      MediaQuery.of(context).size.height / 18,
                                   child: TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.white,
                                         backgroundColor:
-                                        const Color(0xff262626),
+                                            const Color(0xff262626),
                                         textStyle: const TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400),
@@ -3183,12 +3192,12 @@ class _POSPageState extends State<POS> {
                                   padding: const EdgeInsets.all(5.0),
                                   width: MediaQuery.of(context).size.width / 15,
                                   height:
-                                  MediaQuery.of(context).size.height / 18,
+                                      MediaQuery.of(context).size.height / 18,
                                   child: TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.white,
                                         backgroundColor:
-                                        const Color(0xff262626),
+                                            const Color(0xff262626),
                                         textStyle: const TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400),
@@ -3200,12 +3209,12 @@ class _POSPageState extends State<POS> {
                                   padding: const EdgeInsets.all(5.0),
                                   width: MediaQuery.of(context).size.width / 15,
                                   height:
-                                  MediaQuery.of(context).size.height / 18,
+                                      MediaQuery.of(context).size.height / 18,
                                   child: TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.white,
                                         backgroundColor:
-                                        const Color(0xff262626),
+                                            const Color(0xff262626),
                                         textStyle: const TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400),
@@ -3217,12 +3226,12 @@ class _POSPageState extends State<POS> {
                                   padding: const EdgeInsets.all(5.0),
                                   width: MediaQuery.of(context).size.width / 15,
                                   height:
-                                  MediaQuery.of(context).size.height / 18,
+                                      MediaQuery.of(context).size.height / 18,
                                   child: TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.white,
                                         backgroundColor:
-                                        const Color(0xff262626),
+                                            const Color(0xff262626),
                                         textStyle: const TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400),
@@ -3244,12 +3253,12 @@ class _POSPageState extends State<POS> {
                                   padding: const EdgeInsets.all(5.0),
                                   width: MediaQuery.of(context).size.width / 15,
                                   height:
-                                  MediaQuery.of(context).size.height / 18,
+                                      MediaQuery.of(context).size.height / 18,
                                   child: TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.white,
                                         backgroundColor:
-                                        const Color(0xff262626),
+                                            const Color(0xff262626),
                                         textStyle: const TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400),
@@ -3261,12 +3270,12 @@ class _POSPageState extends State<POS> {
                                   padding: const EdgeInsets.all(5.0),
                                   width: MediaQuery.of(context).size.width / 15,
                                   height:
-                                  MediaQuery.of(context).size.height / 18,
+                                      MediaQuery.of(context).size.height / 18,
                                   child: TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.white,
                                         backgroundColor:
-                                        const Color(0xff262626),
+                                            const Color(0xff262626),
                                         textStyle: const TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400),
@@ -3278,12 +3287,12 @@ class _POSPageState extends State<POS> {
                                   padding: const EdgeInsets.all(5.0),
                                   width: MediaQuery.of(context).size.width / 15,
                                   height:
-                                  MediaQuery.of(context).size.height / 18,
+                                      MediaQuery.of(context).size.height / 18,
                                   child: TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.white,
                                         backgroundColor:
-                                        const Color(0xff262626),
+                                            const Color(0xff262626),
                                         textStyle: const TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400),
@@ -3295,12 +3304,12 @@ class _POSPageState extends State<POS> {
                                   padding: const EdgeInsets.all(5.0),
                                   width: MediaQuery.of(context).size.width / 15,
                                   height:
-                                  MediaQuery.of(context).size.height / 18,
+                                      MediaQuery.of(context).size.height / 18,
                                   child: TextButton(
                                       style: TextButton.styleFrom(
                                         primary: Colors.white,
                                         backgroundColor:
-                                        const Color(0xff262626),
+                                            const Color(0xff262626),
                                         textStyle: const TextStyle(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400),
@@ -3320,7 +3329,7 @@ class _POSPageState extends State<POS> {
                               //   color: Colors.red,
                               child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
@@ -3328,8 +3337,8 @@ class _POSPageState extends State<POS> {
                                       width: MediaQuery.of(context).size.width /
                                           14,
                                       height:
-                                      MediaQuery.of(context).size.height /
-                                          18,
+                                          MediaQuery.of(context).size.height /
+                                              18,
                                       child: const Text(
                                         'Total Cash:',
                                         style: TextStyle(
@@ -3342,8 +3351,8 @@ class _POSPageState extends State<POS> {
                                       width: MediaQuery.of(context).size.width /
                                           11,
                                       height:
-                                      MediaQuery.of(context).size.height /
-                                          18,
+                                          MediaQuery.of(context).size.height /
+                                              18,
                                       child: const TextField(
                                         decoration: InputDecoration(
                                           isDense: true,
@@ -3360,10 +3369,10 @@ class _POSPageState extends State<POS> {
                                     Container(
                                       padding: const EdgeInsets.all(5.0),
                                       width:
-                                      MediaQuery.of(context).size.width / 9,
+                                          MediaQuery.of(context).size.width / 9,
                                       height:
-                                      MediaQuery.of(context).size.height /
-                                          18,
+                                          MediaQuery.of(context).size.height /
+                                              18,
                                       child: TextButton(
                                           style: TextButton.styleFrom(
                                             //    shape: const BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5),
@@ -3373,18 +3382,18 @@ class _POSPageState extends State<POS> {
 
                                             primary: Colors.white,
                                             backgroundColor:
-                                            const Color(0xff10C103),
+                                                const Color(0xff10C103),
                                             textStyle: const TextStyle(
                                                 fontSize: 11,
                                                 fontWeight: FontWeight.w400),
                                           ),
                                           onPressed: () {},
                                           child:
-                                          const Text('pay full in cash')),
+                                              const Text('pay full in cash')),
                                     )
                                   ])
-                            // color: Colors.grey,
-                          )
+                              // color: Colors.grey,
+                              )
                         ],
                       ),
                       //color: Colors.grey,
@@ -3420,9 +3429,9 @@ class _POSPageState extends State<POS> {
                                 children: [
                                   SizedBox(
                                     width:
-                                    MediaQuery.of(context).size.width / 14,
+                                        MediaQuery.of(context).size.width / 14,
                                     height:
-                                    MediaQuery.of(context).size.height / 18,
+                                        MediaQuery.of(context).size.height / 18,
                                     //color: Colors.grey,
                                     child: const Text(
                                       'Amount:',
@@ -3433,9 +3442,9 @@ class _POSPageState extends State<POS> {
                                   ),
                                   SizedBox(
                                     width:
-                                    MediaQuery.of(context).size.width / 5.5,
+                                        MediaQuery.of(context).size.width / 5.5,
                                     height:
-                                    MediaQuery.of(context).size.height / 18,
+                                        MediaQuery.of(context).size.height / 18,
                                     child: TextField(
                                       focusNode: amount,
                                       controller: amountController,
@@ -3464,9 +3473,9 @@ class _POSPageState extends State<POS> {
                                 children: [
                                   SizedBox(
                                     width:
-                                    MediaQuery.of(context).size.width / 14,
+                                        MediaQuery.of(context).size.width / 14,
                                     height:
-                                    MediaQuery.of(context).size.height / 18,
+                                        MediaQuery.of(context).size.height / 18,
                                     // color: Colors.grey,
                                     child: const Text(
                                       'Card Type:',
@@ -3477,9 +3486,9 @@ class _POSPageState extends State<POS> {
                                   ),
                                   SizedBox(
                                     width:
-                                    MediaQuery.of(context).size.width / 5.5,
+                                        MediaQuery.of(context).size.width / 5.5,
                                     height:
-                                    MediaQuery.of(context).size.height / 18,
+                                        MediaQuery.of(context).size.height / 18,
                                     child: TextField(
                                       focusNode: cardType,
                                       controller: cardTypeController,
@@ -3505,9 +3514,9 @@ class _POSPageState extends State<POS> {
                                 children: [
                                   SizedBox(
                                     width:
-                                    MediaQuery.of(context).size.width / 14,
+                                        MediaQuery.of(context).size.width / 14,
                                     height:
-                                    MediaQuery.of(context).size.height / 18,
+                                        MediaQuery.of(context).size.height / 18,
                                     //color: Colors.grey,
                                     child: const Text(
                                       'Card No:',
@@ -3518,9 +3527,9 @@ class _POSPageState extends State<POS> {
                                   ),
                                   SizedBox(
                                     width:
-                                    MediaQuery.of(context).size.width / 5.5,
+                                        MediaQuery.of(context).size.width / 5.5,
                                     height:
-                                    MediaQuery.of(context).size.height / 18,
+                                        MediaQuery.of(context).size.height / 18,
                                     child: TextField(
                                       focusNode: cardNo,
                                       controller: cardNoController,
@@ -3544,15 +3553,15 @@ class _POSPageState extends State<POS> {
                               height: MediaQuery.of(context).size.height / 18,
                               child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
                                     width:
-                                    MediaQuery.of(context).size.width / 14,
+                                        MediaQuery.of(context).size.width / 14,
                                     height:
-                                    MediaQuery.of(context).size.height / 18,
+                                        MediaQuery.of(context).size.height / 18,
                                     child: const Text(
                                       'Discount:',
                                       style: TextStyle(
@@ -3563,9 +3572,9 @@ class _POSPageState extends State<POS> {
                                   Container(
                                     alignment: Alignment.center,
                                     width:
-                                    MediaQuery.of(context).size.width / 18,
+                                        MediaQuery.of(context).size.width / 18,
                                     height:
-                                    MediaQuery.of(context).size.height / 18,
+                                        MediaQuery.of(context).size.height / 18,
                                     child: TextField(
                                       focusNode: discount,
                                       controller: discountController,
@@ -3581,9 +3590,9 @@ class _POSPageState extends State<POS> {
                                   Container(
                                     alignment: Alignment.center,
                                     width:
-                                    MediaQuery.of(context).size.width / 16,
+                                        MediaQuery.of(context).size.width / 16,
                                     height:
-                                    MediaQuery.of(context).size.height / 18,
+                                        MediaQuery.of(context).size.height / 18,
                                     child: const TextField(
                                       decoration: InputDecoration(
                                         isDense: true,
@@ -3597,14 +3606,14 @@ class _POSPageState extends State<POS> {
                                   Container(
                                     alignment: Alignment.center,
                                     width:
-                                    MediaQuery.of(context).size.width / 15,
+                                        MediaQuery.of(context).size.width / 15,
                                     height:
-                                    MediaQuery.of(context).size.height / 18,
+                                        MediaQuery.of(context).size.height / 18,
                                     child: TextButton(
                                         style: TextButton.styleFrom(
                                           primary: Colors.white,
                                           backgroundColor:
-                                          const Color(0xffF38811),
+                                              const Color(0xffF38811),
                                           textStyle: const TextStyle(
                                               fontSize: 11,
                                               fontWeight: FontWeight.w400),
@@ -3622,7 +3631,7 @@ class _POSPageState extends State<POS> {
               ),
               Container(
                 height:
-                MediaQuery.of(context).size.height / 12, //height of button
+                    MediaQuery.of(context).size.height / 12, //height of button
                 width: MediaQuery.of(context).size.width / 1.7,
                 color: Colors.white,
                 child: Row(
@@ -3701,12 +3710,12 @@ class _POSPageState extends State<POS> {
                   color: Colors.white,
                   child: const TextField(
                       decoration: InputDecoration(
-                        hintText: 'Search',
-                        isDense: true,
-                        border: OutlineInputBorder(),
-                      )
-                    // contentPadding: EdgeInsets.all(30)),
-                  ),
+                    hintText: 'Search',
+                    isDense: true,
+                    border: OutlineInputBorder(),
+                  )
+                      // contentPadding: EdgeInsets.all(30)),
+                      ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height /
@@ -3752,8 +3761,8 @@ class _POSPageState extends State<POS> {
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         color: Colors.grey, width: .2))
-                              //color: Colors.orange,
-                            ),
+                                //color: Colors.orange,
+                                ),
                             Container(
                                 padding: const EdgeInsets.all(3),
                                 height: MediaQuery.of(context).size.height / 10,
@@ -3782,7 +3791,7 @@ class _POSPageState extends State<POS> {
                                 ),
                                 decoration: BoxDecoration(
                                   border:
-                                  Border.all(color: Colors.grey, width: .2),
+                                      Border.all(color: Colors.grey, width: .2),
                                 )),
                             Container(
                               padding: const EdgeInsets.all(3),
@@ -4156,16 +4165,18 @@ class _POSPageState extends State<POS> {
       });
     } else {
       try {
+        HttpOverrides.global = MyHttpOverrides();
+
         String baseUrl = BaseUrl.bUrl;
         SharedPreferences prefs = await SharedPreferences.getInstance();
         var companyID = prefs.getString('companyID') ?? 0;
-        //var userID = prefs.getInt("user_id");
         var branchID = BaseUrl.branchID;
 
         var accessToken = prefs.getString('access') ?? '';
         final String url = '$baseUrl/posholds/pos/product-group/list/';
+        print(url);
         Map data = {"CompanyID": companyID, "BranchID": branchID};
-
+        print(data);
         //encode Map to JSON
         var body = json.encode(data);
 
@@ -4179,6 +4190,8 @@ class _POSPageState extends State<POS> {
         Map n = json.decode(utf8.decode(response.bodyBytes));
         var status = n["StatusCode"];
         var responseJson = n["data"];
+        print(responseJson);
+        print(status);
         if (status == 6000) {
           setState(() {
             stop();
@@ -4213,6 +4226,8 @@ class _POSPageState extends State<POS> {
       });
     } else {
       try {
+        HttpOverrides.global = MyHttpOverrides();
+
         String baseUrl = BaseUrl.bUrl;
         SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -4223,6 +4238,7 @@ class _POSPageState extends State<POS> {
         var priceRounding = BaseUrl.priceRounding;
         var accessToken = prefs.getString('access') ?? '';
         final String url = '$baseUrl/posholds/pos-product-list/';
+        print(url);
 
         Map data = {
           "CompanyID": companyID,
@@ -4230,7 +4246,7 @@ class _POSPageState extends State<POS> {
           "GroupID": groupId,
           "PriceRounding": priceRounding
         };
-
+        print(data);
         var body = json.encode(data);
         var response = await http.post(Uri.parse(url),
             headers: {
@@ -4242,7 +4258,8 @@ class _POSPageState extends State<POS> {
         print(response.body);
         var status = n["StatusCode"];
         var responseJson = n["data"];
-
+        print(status);
+        print(responseJson);
         if (status == 6000) {
           setState(() {
             stop();
@@ -4274,6 +4291,8 @@ class _POSPageState extends State<POS> {
       });
     } else {
       try {
+        HttpOverrides.global = MyHttpOverrides();
+
         String baseUrl = BaseUrl.bUrl;
         SharedPreferences prefs = await SharedPreferences.getInstance();
         var companyID = prefs.getString('companyID') ?? 0;
@@ -4371,6 +4390,8 @@ class _POSPageState extends State<POS> {
       });
     } else {
       try {
+        HttpOverrides.global = MyHttpOverrides();
+
         String baseUrl = BaseUrl.bUrl;
         SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -4432,6 +4453,8 @@ class _POSPageState extends State<POS> {
       });
     } else {
       try {
+        HttpOverrides.global = MyHttpOverrides();
+
         String baseUrl = BaseUrl.bUrl;
         SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -4493,8 +4516,8 @@ class CategoryListModel {
 
   CategoryListModel(
       {required this.categoryName,
-        required this.categoryGroupId,
-        required this.categoryId});
+      required this.categoryGroupId,
+      required this.categoryId});
 
   factory CategoryListModel.fromJson(Map<dynamic, dynamic> json) {
     return CategoryListModel(
@@ -4521,19 +4544,19 @@ class ProductListModelDetail {
 
   ProductListModelDetail(
       {required this.id,
-        required this.productName,
-        required this.unitName,
-        required this.gstSalesTax,
-        required this.salesTax,
-        required this.gstTaxName,
-        required this.vatTaxName,
-        required this.productId,
-        required this.unitId,
-        required this.gstId,
-        required this.vatId,
-        required this.defaultSalesPrice,
-        required this.defaultPurchasePrice,
-        required this.isInclusive});
+      required this.productName,
+      required this.unitName,
+      required this.gstSalesTax,
+      required this.salesTax,
+      required this.gstTaxName,
+      required this.vatTaxName,
+      required this.productId,
+      required this.unitId,
+      required this.gstId,
+      required this.vatId,
+      required this.defaultSalesPrice,
+      required this.defaultPurchasePrice,
+      required this.isInclusive});
 
   factory ProductListModelDetail.fromJson(Map<dynamic, dynamic> json) {
     return ProductListModelDetail(
@@ -4554,14 +4577,8 @@ class ProductListModelDetail {
   }
 }
 
-
-
-
-
-
-
 class PassingDetail {
-  final  int productId,
+  final int productId,
       priceListId,
       createUserId,
       salesDetailsID,
@@ -4601,8 +4618,6 @@ class PassingDetail {
       productTaxName;
   final bool productInc;
 
-
-
   PassingDetail({
     required this.uniqueId,
     required this.productName,
@@ -4610,7 +4625,7 @@ class PassingDetail {
     required this.unitPrice,
     required this.netAmount,
     required this.salesDetailsID,
-    required  this.quantity,
+    required this.quantity,
     required this.discountAmount,
     required this.productId,
     required this.rateWithTax,
@@ -4619,21 +4634,21 @@ class PassingDetail {
     required this.additionalDiscount,
     required this.discountPercentage,
     required this.taxableAmount,
-    required  this.vatPer,
+    required this.vatPer,
     required this.vatAmount,
     required this.sgsPer,
     required this.cgsAmount,
     required this.cgsPer,
     required this.createUserId,
     required this.igsAmount,
-    required  this.igsPer,
+    required this.igsPer,
     required this.sgsAmount,
     required this.netAmountRounded,
     required this.detailID,
     required this.inclusivePrice,
     required this.roundedUnitPrice,
-    required  this.roundedQuantity,
-    required  this.gstPer,
+    required this.roundedQuantity,
+    required this.gstPer,
     required this.unitPriceName,
     required this.productTaxID,
     required this.productTaxName,
@@ -4642,12 +4657,11 @@ class PassingDetail {
     required this.salesPrice,
     required this.productInc,
     required this.totalTaxRounded,
-    required  this.description,
+    required this.description,
   });
 
   factory PassingDetail.fromJson(Map<dynamic, dynamic> json) {
     return PassingDetail(
-
       uniqueId: json['id'],
       productId: json['ProductID'],
       productName: json['ProductName'],
@@ -4691,8 +4705,6 @@ class PassingDetail {
   }
 }
 
-
-
 List<PosListModel> onlineOrderLists = [];
 List<PosListModel> takeAwayOrderLists = [];
 List<PosListModel> carOrderLists = [];
@@ -4710,14 +4722,14 @@ class PosListModel {
 
   PosListModel(
       {required this.salesOrderId,
-        required this.salesId,
-        required this.custName,
-        required this.tokenNo,
-        required this.phone,
-        required this.status,
-        required this.salesOrderGrandTotal,
-        required this.salesGrandTotal,
-        required this.orderTime});
+      required this.salesId,
+      required this.custName,
+      required this.tokenNo,
+      required this.phone,
+      required this.status,
+      required this.salesOrderGrandTotal,
+      required this.salesGrandTotal,
+      required this.orderTime});
 
   factory PosListModel.fromJson(Map<dynamic, dynamic> json) {
     return PosListModel(
@@ -4733,40 +4745,37 @@ class PosListModel {
   }
 }
 
-
-
-
-
-
-
 List<DiningListModel> diningOrderList = [];
 
 class DiningListModel {
   ///model
-  final String id,  title, description,  priceCategory, status, priceId, salesOrderID, salesMasterID,orderTime;
-
-
-
+  final String id,
+      title,
+      description,
+      priceCategory,
+      status,
+      priceId,
+      salesOrderID,
+      salesMasterID,
+      orderTime;
 
   final bool isActive;
-  final int salesOrderGrandTotal, salesGrandTotal    ;
+  final int salesOrderGrandTotal, salesGrandTotal;
 
-  DiningListModel(
-      {required this.id,
-        required this.title,
-        required this.description,
-        required this.priceCategory,
-        required this.status,
-        required this.priceId,
-        required this.salesOrderID,
-        required this.salesMasterID,
-        required this.orderTime,
-        required this.salesOrderGrandTotal,
-        required this.salesGrandTotal,
-        required this.isActive,
-
-
-      });
+  DiningListModel({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.priceCategory,
+    required this.status,
+    required this.priceId,
+    required this.salesOrderID,
+    required this.salesMasterID,
+    required this.orderTime,
+    required this.salesOrderGrandTotal,
+    required this.salesGrandTotal,
+    required this.isActive,
+  });
 
   factory DiningListModel.fromJson(Map<dynamic, dynamic> json) {
     return DiningListModel(
@@ -4782,12 +4791,7 @@ class DiningListModel {
       salesGrandTotal: json['SalesGrandTotal'],
       orderTime: json['OrderTime'],
       isActive: json['IsActive'],
-
     );
-
-
-
-
   }
 }
 

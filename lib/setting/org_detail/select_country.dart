@@ -1,20 +1,23 @@
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'settings_page.dart';
+import 'package:rassasy_tab/global/global.dart';
+import '../settings_page.dart';
 
-class SelectState extends StatefulWidget {
+class SelectCountry extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SelectStateState();
+  State<StatefulWidget> createState() => _SelectCountryState();
 }
 
-class _SelectStateState extends State<SelectState> {
-  Future<Null> getStateDetails() async {
+class _SelectCountryState extends State<SelectCountry> {
+  Future<Null> getCountryDetails() async {
     try {
-      var countryId = OrganisationCountry.country_id;
-       String url = "https://api.viknbooks.com/api/v8/states/country-states/$countryId/";
+      String baseUrl = BaseUrl.bUrl;
+      final url = '$baseUrl/countries/countries/';
+
+    //  const String url = "https://www.erp.vikncodes.com/api/v8/countries/countries/";
       print(url);
+
       //encode Map to JSON
       var response = await http.get(
         Uri.parse(url),
@@ -35,8 +38,8 @@ class _SelectStateState extends State<SelectState> {
 
       if (status == 6000) {
         setState(() {
-          for (Map user in responseJson) {
-            stateDetail.add(StateData.fromJson(user));
+          for (Map aq in responseJson) {
+            _countryDetails.add(CountryData.fromJson(aq));
           }
         });
       } else if (status == 6001) {
@@ -51,14 +54,10 @@ class _SelectStateState extends State<SelectState> {
 
   @override
   void initState() {
-    stateDetail.clear();
+    _countryDetails.clear();
     super.initState();
-    getStateDetails();
+    getCountryDetails();
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +70,7 @@ class _SelectStateState extends State<SelectState> {
             },
             icon: const Icon(Icons.arrow_back,color: Colors.black)),
         title: const Text(
-          'Choose a State',
+          'Choose a Country',
           style: TextStyle( fontSize: 17,color: Colors.black),
         ),
         actions: [
@@ -91,31 +90,29 @@ class _SelectStateState extends State<SelectState> {
               width: MediaQuery.of(context).size.width / 1,
               child: ListView.builder(
                 itemExtent: MediaQuery.of(context).size.height / 14,
-                itemCount: stateDetail.length,
+                itemCount: _countryDetails.length,
                 itemBuilder: (context, index) {
                   return Card(
-                      child:  ListTile(
+                    child:  ListTile(
 
                           title: Text(
-                            stateDetail[index].stateName,
+                            _countryDetails[index].countryName,
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           trailing: Text(
-                            stateDetail[index].stateType,
+                            _countryDetails[index].taxtype,
                             style: const TextStyle(
                               fontSize: 14, ),
                           ),
                           onTap: () async {
 
 
-                          OrganisationCountry.state_id =  stateDetail[index].stateID;
-                         // print("OrganisationCountry.state_id");
-                          print(OrganisationCountry.state_id);
+                            OrganisationCountry.country_id =  _countryDetails[index].countryID;
 
-                            Navigator.pop(context,  stateDetail[index].stateName);
+                            Navigator.pop(context,  _countryDetails[index].countryName);
                           })
                   );
                 },
@@ -128,33 +125,39 @@ class _SelectStateState extends State<SelectState> {
   }
 }
 
-List<StateData> stateDetail = [];
+List<CountryData> _countryDetails = [];
 
-class StateData {
-  final String stateName, stateID,  stateType,countryName,country,countryCode;
+class CountryData {
+  final String countryName, countryID, countryCode, isdCode,currencyName,change,symbol,fractionUnit,symbolUnicode,taxtype;
 
 
 
-  StateData({
-    required this.countryName,
-    required this.countryCode,
-    required this.country,
-    required this.stateID,
-    required this.stateName,
-    required this.stateType,
-
+  CountryData({required this.countryID,
+        required this.countryName,
+        required this.countryCode,
+        required this.isdCode,
+    required this.currencyName,
+    required this.change,
+    required this.symbol,
+    required this.fractionUnit,
+    required this.symbolUnicode,
+    required this.taxtype,
 
 
   });
 
-  factory StateData.fromJson(Map<dynamic, dynamic> json) {
-    return StateData(
-      countryName: json['Country_Name'],
-      countryCode: json['CountryCode'],
-       stateType: json['State_Type'],
-       stateName: json['Name'],
-      stateID: json['id'],
-      country: json['Country'],
+  factory CountryData.fromJson(Map<dynamic, dynamic> json) {
+    return CountryData(
+        countryName: json['Country_Name'],
+        countryID: json['id'],
+        countryCode: json['CountryCode'],
+        isdCode: json['ISD_Code'],
+        fractionUnit: json['FractionalUnits'],
+      change: json['Change'],
+      taxtype: json['Tax_Type'],
+      symbolUnicode: json['CurrencySymbolUnicode'],
+      currencyName: json['Currency_Name'],
+      symbol: json['Symbol'],
 
 
 

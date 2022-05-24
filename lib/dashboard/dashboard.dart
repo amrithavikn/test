@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:rassasy_tab/login.dart';
-import 'package:rassasy_tab/screen/pos.dart';
-import 'package:rassasy_tab/screen/product_details.dart';
-import 'package:rassasy_tab/screen/product_group.dart';
-import 'package:rassasy_tab/screen/report_page.dart';
-import 'package:rassasy_tab/screen/setting/settings_page.dart';
+import 'package:rassasy_tab/auth/login/login.dart';
+import 'package:rassasy_tab/setting/settings_page.dart';
 
-import 'customer_details.dart';
+import 'detail/customer/customer_details.dart';
+import 'detail/pos/pos.dart';
+import 'detail/product/create/product_details.dart';
+import 'detail/product_group/product_group.dart';
+import 'detail/report/report_page.dart';
+
 
 
 class DashBoard extends StatelessWidget {
