@@ -16,7 +16,8 @@ start(context) {
 
 class BaseUrl{
 
-  static String bUrl =   "http://103.177.224.30:8080/api/v9";
+  static String bUrl =   "https://www.api.vikncodes.in/api/v9";
+//  static String bUrl =   "http://103.177.224.30:8080/api/v9";
   static int branchID =   1;
   static int priceRounding=2;
 
